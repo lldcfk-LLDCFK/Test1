@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <!-- 字符集声明应置于head最前面 -->
     <meta charset="UTF-8">
+    <!-- 双重声明确保兼容性 -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>支持UP主</title>
     <style>
+        /* 新增字体回退方案 */
+        @font-face {
+            font-family: 'HarmonyOS_Sans_SC';
+            src: local('HarmonyOS Sans SC'), local('PingFang SC'), local('Microsoft YaHei');
+        }
+
         body {
             background: #f0f0f0;
             display: flex;
@@ -12,69 +21,43 @@
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            font-family: 'Microsoft YaHei', sans-serif;
+            /* 增强字体兼容性 */
+            font-family: 'HarmonyOS_Sans_SC', 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif;
         }
 
-        /* 爱心动画 */
-        .heart {
-            position: relative;
-            width: 100px;
-            height: 90px;
-            animation: heartbeat 1.2s infinite;
-            margin-bottom: 40px;
-        }
+        /* 优化渐变兼容性 */
         .heart::before,
         .heart::after {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 80px;
             background: linear-gradient(45deg, #ff3f3f, #ff1493);
-            border-radius: 50px 50px 0 0;
-        }
-        .heart::before {
-            left: 50px;
-            transform: rotate(-45deg);
-            transform-origin: 0 100%;
-        }
-        .heart::after {
-            left: 0;
-            transform: rotate(45deg);
-            transform-origin: 100% 100%;
+            background: -webkit-linear-gradient(45deg, #ff3f3f, #ff1493); /* 兼容旧版浏览器 */
         }
 
-        /* 按钮样式 */
+        /* 新增文字阴影增强可读性 */
         .support-btn {
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            background: linear-gradient(135deg, #00a1d6, #0092ff);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 146, 255, 0.3);
-            text-decoration: none;
-        }
-        .support-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(0, 146, 255, 0.5);
+            text-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+            /* 新增禁止文字选择 */
+            user-select: none;
+            -webkit-user-select: none;
         }
 
-        /* 心跳动画 */
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            15% { transform: scale(1.3); }
-            30% { transform: scale(1); }
-            45% { transform: scale(1.15); }
-            60% { transform: scale(1); }
+        /* 新增移动端点击效果 */
+        @media (hover: none) {
+            .support-btn:active {
+                transform: scale(0.95);
+            }
         }
     </style>
 </head>
 <body>
-    <div class="heart"></div>
-    <a href="https://space.bilibili.com/3546596132259892?spm_id_from=333.1007.0.0" target="_blank" class="support-btn">
-        支持支持UP吧 ❤
+    <!-- 添加aria标签增强可访问性 -->
+    <div class="heart" aria-hidden="true"></div>
+    <a href="https://space.bilibili.com/3546596132259892?spm_id_from=333.1007.0.0" 
+       target="_blank" 
+       class="support-btn"
+       role="button"
+       aria-label="前往B站支持UP主">
+        <!-- 使用全角空格替代普通空格 -->
+        支持支持UP吧　❤
     </a>
 </body>
 </html>
